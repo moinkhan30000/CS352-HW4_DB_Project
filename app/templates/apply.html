@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Apply for Internship</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Apply for New Internship</h1>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    {% if companies %}
+        <form method="post">
+            <label for="cid">Enter Company ID to Apply:</label><br>
+            <input type="text" id="cid" name="cid" required><br><br>
+            <button type="submit">Apply</button>
+        </form>
+
+        <h2>Available Companies:</h2>
+        <table>
+            <tr>
+                <th>Company ID</th>
+                <th>Company Name</th>
+                <th>City</th>
+                <th>GPA Threshold</th>
+                <th>Quota</th>
+            </tr>
+            {% for company in companies %}
+            <tr>
+                <td>{{ company['cid'] }}</td>
+                <td>{{ company['cname'] | safe }}</td>
+                <td>{{ company['city'] }}</td>
+                <td>{{ "%.2f"|format(company['gpa_threshold']) }}</td>
+                <td>{{ company['quota'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No available companies to apply for.</p>
+    {% endif %}
+
+    <br>
+    <a href="{{ url_for('main_page') }}">Back to Main Page</a> |
+    <a href="{{ url_for('logout') }}">Logout</a>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Welcome, {{ session['username'] }}!</h1>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <h2>Your Internship Applications:</h2>
+
+    {% if applications %}
+        <table>
+            <tr>
+                <th>Company Name</th>
+                <th>City</th>
+                <th>GPA Threshold</th>
+                <th>Quota</th>
+                <th>Cancel Application</th>
+            </tr>
+            {% for application in applications %}
+            <tr>
+                <td>{{ application['cname'] | safe }}</td>
+                <td>{{ application['city'] }}</td>
+                <td>{{ "%.2f"|format(application['gpa_threshold']) }}</td>
+                <td>{{ application['quota'] }}</td>
+                <td><a href="{{ url_for('cancel_application', cid=application['cid']) }}">Cancel</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No applications yet.</p>
+    {% endif %}
+
+    <br>
+    <a href="{{ url_for('apply') }}">Apply for New Internship</a> |
+    <a href="{{ url_for('summary') }}">View Application Summary</a> |
+    <a href="{{ url_for('logout') }}">Logout</a>
+
+</body>
+</html>

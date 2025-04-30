@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Application Summary</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Application Summary</h1>
+
+    <h2>Companies Applied (Sorted by Quota)</h2>
+    {% if companies_applied %}
+        <table>
+            <tr>
+                <th>Company Name</th>
+                <th>Quota</th>
+                <th>GPA Threshold</th>
+            </tr>
+            {% for company in companies_applied %}
+            <tr>
+                <td>{{ company['cname'] | safe }}</td>
+                <td>{{ company['quota'] }}</td>
+                <td>{{ company['gpa_threshold'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No applications found.</p>
+    {% endif %}
+
+    <h2>GPA Threshold Statistics</h2>
+    <p>Max GPA Threshold: {{ gpa_thresholds['max_gpa_threshold'] | round(2) }}</p>
+    <p>Min GPA Threshold: {{ gpa_thresholds['min_gpa_threshold'] | round(2) }}</p>    
+    <h2>Applications Per City</h2>
+    {% if applications_per_city %}
+        <table>
+            <tr>
+                <th>City</th>
+                <th>Applications</th>
+            </tr>
+            {% for city in applications_per_city %}
+            <tr>
+                <td>{{ city['city'] }}</td>
+                <td>{{ city['application_count'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No city data available.</p>
+    {% endif %}
+
+    <h2>Company with Maximum Quota</h2>
+    <p>{{ max_quota_company['company_with_max_quota'] }}</p>
+
+    <h2>Company with Minimum Quota</h2>
+    <p>{{ min_quota_company['company_with_min_quota'] }}</p>
+
+    <br>
+    <a href="{{ url_for('main_page') }}">Back to Main Page</a> |
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
