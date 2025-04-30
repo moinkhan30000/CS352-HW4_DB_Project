@@ -1,35 +1,34 @@
-# 📚 CS353 HW4 — Internship Application Portal
 
-A web app where university students can apply for summer internships at different companies.  
-Built using **Flask**, **MySQL**, and **Docker Compose** for CS353 — Spring 2025 Homework 4.
+# CS352 HW4 DB Project
 
----
-
-## 🚀 How to Run
-
-### 1. Clone the Repository
+## 🚀 Setup Instructions
 
 ```bash
 git clone https://github.com/moinkhan30000/CS352-HW4_DB_Project.git
 cd CS352-HW4_DB_Project
-2. Build the Docker Images
-bash
-Copy
-Edit
+```
+
+### 2. Build the Docker Images
+
+```bash
 docker-compose build
-3. Start the App
-bash
-Copy
-Edit
+```
+
+### 3. Start the App
+
+```bash
 docker-compose up
+```
+
 Then open your browser and go to:
 
 👉 http://localhost:5000
 
-📁 Folder Structure
-bash
-Copy
-Edit
+---
+
+## 📁 Folder Structure
+
+```
 CS352-HW4_DB_Project/
 ├── app/
 │   ├── app.py                # Flask app
@@ -39,110 +38,126 @@ CS352-HW4_DB_Project/
 ├── requirements.txt          # Python dependencies
 ├── Dockerfile                # Flask app image build file
 └── docker-compose.yaml       # Defines web + db stack
-🔐 Login Instructions
+```
+
+---
+
+## 🔐 Login Instructions
+
 Students use:
 
-Username = their name (e.g., Ali)
+- **Username** = their name (e.g., Ali)  
+- **Password** = their student ID (e.g., S101)
 
-Password = their student ID (e.g., S101)
+**Example:**
 
-Example:
-
-text
-Copy
-Edit
+```
 Username: Ali
 Password: S101
-All credentials are listed in the preloaded schema.sql file.
+```
 
-🗄️ Database Summary
-Tables
+All credentials are listed in the preloaded `schema.sql` file.
 
-Table	Description
-student	ID, name, birthdate, department, GPA
-company	Internship info with quota & GPA rule
-apply	Student applications (max 3 per student)
-Sample Students
+---
 
-SID	Name	Dept	GPA
-S101	Ali	CS	2.92
-S102	Veli	EE	3.96
-S103	Ayse	IE	3.30
-🧠 Features
-Student registration and login
+## 🗄️ Database Summary
 
-Company listing with GPA filters
+### Tables
 
-Internship applications (max 3)
+| Table   | Description                                  |
+|---------|----------------------------------------------|
+| student | ID, name, birthdate, department, GPA         |
+| company | Internship info with quota & GPA rule        |
+| apply   | Student applications (max 3 per student)     |
 
-Application cancellation
+### Sample Students
 
-Summary page using raw SQL queries
+| SID  | Name | Dept | GPA  |
+|------|------|------|------|
+| S101 | Ali  | CS   | 2.92 |
+| S102 | Veli | EE   | 3.96 |
+| S103 | Ayse | IE   | 3.30 |
 
-MySQL seeding via schema.sql
+---
 
-Dockerized development and deployment
+## 🧠 Features
 
-🛠️ Development Tips
-Live Reload
+- Student registration and login
+- Company listing with GPA filters
+- Internship applications (max 3)
+- Application cancellation
+- Summary page using raw SQL queries
+- MySQL seeding via `schema.sql`
+- Dockerized development and deployment
+
+---
+
+## 🛠️ Development Tips
+
+### Live Reload
+
 Flask auto-reloads changes thanks to volume binding:
 
-yaml
-Copy
-Edit
+```yaml
 volumes:
   - ./app:/app
-You can modify Python or HTML files and see changes immediately without restarting.
+```
 
-Detached Mode
+Modify Python or HTML files and see changes immediately.
+
+### Detached Mode
+
 Run in background:
 
-bash
-Copy
-Edit
+```bash
 docker-compose up -d
+```
+
 Follow logs:
 
-bash
-Copy
-Edit
+```bash
 docker-compose logs -f web
+```
+
 Stop everything:
 
-bash
-Copy
-Edit
+```bash
 docker-compose down
-❓ Troubleshooting
-Reset DB if schema or data is wrong:
+```
 
-bash
-Copy
-Edit
+---
+
+## ❓ Troubleshooting
+
+### Reset DB if schema or data is wrong:
+
+```bash
 docker-compose down -v
 docker-compose up --build
-Access MySQL manually:
+```
 
-bash
-Copy
-Edit
+### Access MySQL manually:
+
+```bash
 mysql -h 127.0.0.1 -P 3307 -u root -p
-Password: password
+# Password: password
+```
 
-✅ Status
+---
+
+## ✅ Status
+
 This project meets all CS353 HW4 requirements:
 
- Registration & login
+- ✅ Registration & login  
+- ✅ Internship application (max 3)  
+- ✅ GPA & quota filtering  
+- ✅ SQL-only summary page  
+- ✅ Dockerized environment  
+- ✅ Seeded schema with data  
 
- Internship application (max 3)
+---
 
- GPA & quota filtering
+## 📜 License
 
- SQL-only summary page
-
- Dockerized environment
-
- Seeded schema with data
-
-📜 License
 This project is open-source and available under the MIT License.
